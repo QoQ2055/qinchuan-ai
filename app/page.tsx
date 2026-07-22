@@ -180,17 +180,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="visual-dossier" aria-labelledby="pipeline-dossier-title">
-        <div className="visual-dossier-copy">
-          <p className="section-index">制作分镜 / 01</p>
-          <h2 id="pipeline-dossier-title">从脚本，到<br /><em>交付成片。</em></h2>
-          <p>以分镜、资产、镜头与合成为同一条可控的制作管线。</p>
-        </div>
-        <figure>
-          <img src="/images/ai-storyboard-pipeline.png" loading="lazy" alt="AI 动画制作管线的手绘分镜档案" />
-        </figure>
-      </section>
-
       <section id="experience" className="section experience" aria-labelledby="experience-title">
         <div className="experience-heading"><p className="section-index">02 / 工作经历</p><h2 id="experience-title">从构思到<br />规模化生产。</h2></div>
         <div className="experience-list">
@@ -205,17 +194,6 @@ export default function Home() {
             </article>
           ))}
         </div>
-      </section>
-
-      <section className="visual-dossier visual-dossier-reverse" aria-labelledby="director-dossier-title">
-        <div className="visual-dossier-copy">
-          <p className="section-index">制作分镜 / 02</p>
-          <h2 id="director-dossier-title">镜头、资产与<br /><em>节奏同频。</em></h2>
-          <p>把 AI 漫剧的叙事判断落实到每一帧可交付的画面里。</p>
-        </div>
-        <figure>
-          <img src="/images/ai-storyboard-director.png" loading="lazy" alt="AI 短剧导演监看动画资产的手绘分镜档案" />
-        </figure>
       </section>
 
       <section id="projects" className="section projects" aria-labelledby="projects-title">

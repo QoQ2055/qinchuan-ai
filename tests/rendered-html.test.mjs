@@ -50,10 +50,9 @@ test("server-renders Qin Chuan's resume identity and anchor sections", async () 
   assert.match(html, /class="editorial-hero"/);
   assert.match(html, /class="dossier-entry"/);
   assert.match(html, /class="[^"]*\bproject-dossier\b[^"]*"/);
-  assert.match(html, /class="[^"]*\bvisual-dossier\b[^"]*"/);
-  assert.match(html, /src="\/images\/ai-storyboard-pipeline\.png"/);
-  assert.match(html, /src="\/images\/ai-storyboard-director\.png"/);
-  assert.match(html, /loading="lazy"/);
+  assert.doesNotMatch(html, /\bvisual-dossier\b/);
+  assert.doesNotMatch(html, /src="\/images\/ai-storyboard-pipeline\.png"/);
+  assert.doesNotMatch(html, /src="\/images\/ai-storyboard-director\.png"/);
   assert.match(html, /<title>秦川｜AI动画制作人\/AI短剧全流程搭建<\/title>/);
   assert.match(html, /秦川/);
   assert.match(html, /AI动画制作人\/AI短剧全流程搭建/);
@@ -161,7 +160,7 @@ test("keeps dossier imagery visible and reserves space for entry hover rails", a
   assert.match(reducedMotionCss, /transition-duration:\s*0\.01ms/);
 });
 
-test("stages storyboard dossier modules and readable experience metadata", async () => {
+test("keeps storyboard imagery behind project copy and removes standalone panels", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 
   for (const assetName of ["ai-storyboard-pipeline.png", "ai-storyboard-director.png"]) {
@@ -169,7 +168,12 @@ test("stages storyboard dossier modules and readable experience metadata", async
     assert.ok(asset.size > 0, `${assetName} must exist and contain data`);
   }
 
-  assert.match(css, /\.visual-dossier\s*\{[^}]*display:\s*grid/s);
+  assert.doesNotMatch(css, /\.visual-dossier\b/);
+  const projectGridRule = /\.project-grid\s*,\s*\.project-list\s*\{/.exec(css);
+  assert.ok(projectGridRule, "expected a project grid rule");
+  const projectGridCss = cssBlockAfter(css, projectGridRule.index);
+  assert.match(projectGridCss, /gap:\s*1rem/);
+  assert.doesNotMatch(projectGridCss, /border-left:/);
   assert.match(css, /\.dossier-meta\s*\{[^}]*font-size:\s*clamp\(0\.9rem/s);
   assert.match(
     css,

@@ -311,69 +311,6 @@ a:focus-visible {
   line-height: 1.8;
 }
 
-.visual-dossier {
-  display: grid;
-  grid-template-columns: minmax(12rem, 0.8fr) minmax(0, 1.55fr);
-  gap: clamp(1.5rem, 4vw, 4rem);
-  align-items: end;
-  max-width: min(calc(100% - 3rem), 86rem);
-  margin: clamp(4rem, 9vw, 8rem) auto;
-  padding-block: clamp(1.25rem, 3vw, 2rem);
-  border-block: 1px solid var(--rule);
-}
-
-.visual-dossier-reverse {
-  grid-template-columns: minmax(0, 1.55fr) minmax(12rem, 0.8fr);
-}
-
-.visual-dossier-reverse .visual-dossier-copy {
-  order: 2;
-}
-
-.visual-dossier figure {
-  position: relative;
-  margin: 0;
-  overflow: hidden;
-  border: 1px solid var(--rule-strong);
-  background: #111;
-}
-
-.visual-dossier figure::after {
-  position: absolute;
-  inset: 0;
-  border: 1px solid rgba(200, 255, 0, 0.18);
-  content: "";
-  pointer-events: none;
-}
-
-.visual-dossier img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  filter: saturate(0.78) contrast(1.08);
-}
-
-.visual-dossier-copy h2 {
-  margin: 0.65rem 0 1rem;
-  font-size: clamp(2rem, 4vw, 4.75rem);
-  font-weight: 700;
-  line-height: 0.95;
-  letter-spacing: -0.06em;
-}
-
-.visual-dossier-copy h2 em {
-  color: var(--signal);
-  font-style: normal;
-}
-
-.visual-dossier-copy p:last-child {
-  max-width: 24rem;
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.75;
-}
-
 .experience {
   display: block;
 }
@@ -485,8 +422,8 @@ a:focus-visible {
 .project-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
   margin-top: clamp(2.25rem, 5vw, 4.5rem);
-  border-left: 1px solid var(--rule);
 }
 
 .project-dossier {
@@ -495,9 +432,7 @@ a:focus-visible {
   min-width: 0;
   overflow: hidden;
   padding: 1.75rem;
-  border-top: 1px solid var(--rule);
-  border-right: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
+  border: 1px solid var(--rule);
   background: rgba(8, 8, 8, 0.72);
   transition: background-color 180ms ease, border-color 180ms ease;
 }
@@ -741,8 +676,8 @@ a:focus-visible {
   }
 
   .project-dossier {
-    padding: 1.25rem 0;
-    border-right: 0;
+    padding: 1.25rem;
+    border: 1px solid var(--rule);
   }
 
   .credentials {
@@ -761,22 +696,6 @@ a:focus-visible {
 }
 
 @media (max-width: 640px) {
-  .visual-dossier,
-  .visual-dossier-reverse {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    max-width: min(calc(100% - 2rem), 40rem);
-    margin-block: 3.5rem;
-  }
-
-  .visual-dossier-reverse .visual-dossier-copy {
-    order: 0;
-  }
-
-  .visual-dossier-copy h2 {
-    font-size: clamp(2.15rem, 11vw, 3.6rem);
-  }
-
   .dossier-meta {
     font-size: 0.88rem;
   }
