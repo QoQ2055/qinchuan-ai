@@ -60,7 +60,8 @@ test("server-renders Qin Chuan's resume identity and anchor sections", async () 
   assert.match(html, /年龄：36岁/);
   assert.match(html, /求职意向：动画设计/);
   assert.match(html, /期望城市：北京/);
-  assert.match(html, /北京看云控股有限公司/);
+  assert.match(html, /北京看云控股有限公司（合作）/);
+  assert.match(html, /福建泽联数字服务有限公司（顾问AI方向）/);
   assert.match(html, /杭州蔻艺文化发展有限公司/);
   assert.match(html, /金属及树脂 3D 打印配件研发/);
   assert.match(html, /联发集团下属子公司战略规划及设计管理优化/);

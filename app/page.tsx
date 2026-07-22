@@ -9,7 +9,7 @@ type Experience = {
 
 const experience: Experience[] = [
   {
-    company: "北京看云控股有限公司（兼职）",
+    company: "北京看云控股有限公司（合作）",
     role: "动画设计",
     period: "2026.06 - 至今",
     summary: "主导中小学教材 AI 动画化项目，从脚本、分镜到剪辑合成建立可交付的多学科动画课件流程。",
@@ -22,7 +22,7 @@ const experience: Experience[] = [
     ],
   },
   {
-    company: "福建泽联数字服务有限公司（兼职）",
+    company: "福建泽联数字服务有限公司（顾问AI方向）",
     role: "导演 / 编导",
     period: "2026.01 - 至今",
     summary: "从 0 到 1 搭建 AI 培训与动画生产管线，并为对外合作提供创意和技术可行性支持。",
