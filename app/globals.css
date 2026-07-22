@@ -311,6 +311,69 @@ a:focus-visible {
   line-height: 1.8;
 }
 
+.visual-dossier {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.8fr) minmax(0, 1.55fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: end;
+  max-width: min(calc(100% - 3rem), 86rem);
+  margin: clamp(4rem, 9vw, 8rem) auto;
+  padding-block: clamp(1.25rem, 3vw, 2rem);
+  border-block: 1px solid var(--rule);
+}
+
+.visual-dossier-reverse {
+  grid-template-columns: minmax(0, 1.55fr) minmax(12rem, 0.8fr);
+}
+
+.visual-dossier-reverse .visual-dossier-copy {
+  order: 2;
+}
+
+.visual-dossier figure {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--rule-strong);
+  background: #111;
+}
+
+.visual-dossier figure::after {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(200, 255, 0, 0.18);
+  content: "";
+  pointer-events: none;
+}
+
+.visual-dossier img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  filter: saturate(0.78) contrast(1.08);
+}
+
+.visual-dossier-copy h2 {
+  margin: 0.65rem 0 1rem;
+  font-size: clamp(2rem, 4vw, 4.75rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.visual-dossier-copy h2 em {
+  color: var(--signal);
+  font-style: normal;
+}
+
+.visual-dossier-copy p:last-child {
+  max-width: 24rem;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
 .experience {
   display: block;
 }
@@ -348,10 +411,10 @@ a:focus-visible {
 }
 
 .dossier-meta {
-  color: var(--muted);
-  font-size: 0.72rem;
+  color: #c7c4bc;
+  font-size: clamp(0.9rem, 1vw, 1rem);
   letter-spacing: 0.03em;
-  line-height: 1.55;
+  line-height: 1.65;
 }
 
 .dossier-meta p {
@@ -657,6 +720,28 @@ a:focus-visible {
 
   .contact {
     padding-block: 3.5rem 2.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .visual-dossier,
+  .visual-dossier-reverse {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    max-width: min(calc(100% - 2rem), 40rem);
+    margin-block: 3.5rem;
+  }
+
+  .visual-dossier-reverse .visual-dossier-copy {
+    order: 0;
+  }
+
+  .visual-dossier-copy h2 {
+    font-size: clamp(2.15rem, 11vw, 3.6rem);
+  }
+
+  .dossier-meta {
+    font-size: 0.88rem;
   }
 }
 

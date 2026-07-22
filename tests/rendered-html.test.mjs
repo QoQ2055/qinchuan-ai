@@ -50,6 +50,10 @@ test("server-renders Qin Chuan's resume identity and anchor sections", async () 
   assert.match(html, /class="editorial-hero"/);
   assert.match(html, /class="dossier-entry"/);
   assert.match(html, /class="project-dossier"/);
+  assert.match(html, /class="[^"]*\bvisual-dossier\b[^"]*"/);
+  assert.match(html, /src="\/images\/ai-storyboard-pipeline\.png"/);
+  assert.match(html, /src="\/images\/ai-storyboard-director\.png"/);
+  assert.match(html, /loading="lazy"/);
   assert.match(html, /<title>秦川｜AI动画制作人\/AI短剧全流程搭建<\/title>/);
   assert.match(html, /秦川/);
   assert.match(html, /AI动画制作人\/AI短剧全流程搭建/);
@@ -155,6 +159,22 @@ test("keeps dossier imagery visible and reserves space for entry hover rails", a
   assert.ok(reducedMotionRule, "expected a prefers-reduced-motion media block");
   const reducedMotionCss = cssBlockAfter(css, reducedMotionRule.index);
   assert.match(reducedMotionCss, /transition-duration:\s*0\.01ms/);
+});
+
+test("stages storyboard dossier modules and readable experience metadata", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  for (const assetName of ["ai-storyboard-pipeline.png", "ai-storyboard-director.png"]) {
+    const asset = await stat(new URL(`../public/images/${assetName}`, import.meta.url));
+    assert.ok(asset.size > 0, `${assetName} must exist and contain data`);
+  }
+
+  assert.match(css, /\.visual-dossier\s*\{[^}]*display:\s*grid/s);
+  assert.match(css, /\.dossier-meta\s*\{[^}]*font-size:\s*clamp\(0\.9rem/s);
+  assert.match(
+    css,
+    /@media\s*\(max-width:\s*640px\)\s*\{[\s\S]*\.dossier-meta\s*\{[^}]*font-size:\s*0\.88rem/s,
+  );
 });
 
 test("ships a project-scoped GitHub Pages export and deployment workflow", async () => {
