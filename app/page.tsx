@@ -196,9 +196,33 @@ export default function Home() {
         </div>
       </section>
 
+      <figure className="storyboard-interlude storyboard-interlude--script">
+        <figcaption>
+          <p className="section-index">制作档案 / 01</p>
+          <h3>从脚本，到<br /><em>镜头语言。</em></h3>
+          <p>以角色、场景与镜头规划，让 AI 制作进入可控的叙事流程。</p>
+        </figcaption>
+        <div className="storyboard-frame">
+          <img src="/images/storyboard-script-to-shot.png" alt="纸本分镜、角色设定与监看屏组成的动画制作档案" />
+        </div>
+      </figure>
+
       <section id="projects" className="section projects" aria-labelledby="projects-title">
         <p className="section-index">03 / 项目与资历</p>
-        <div><h2 id="projects-title">设计，是可被<br /><em>验证的系统。</em></h2><div className="project-grid">{projects.map(([title, meta, detail, backgroundClass]) => <article className={`project-dossier ${backgroundClass ?? ""}`} key={title}><p className="project-meta">{meta}</p><h3>{title}</h3><p>{detail}</p></article>)}</div></div>
+        <div className="project-content">
+          <h2 id="projects-title">设计，是可被<br /><em>验证的系统。</em></h2>
+          <div className="project-grid">{projects.map(([title, meta, detail, backgroundClass]) => <article className={`project-dossier ${backgroundClass ?? ""}`} key={title}><p className="project-meta">{meta}</p><h3>{title}</h3><p>{detail}</p></article>)}</div>
+          <figure className="storyboard-interlude storyboard-interlude--rhythm">
+            <div className="storyboard-frame">
+              <img src="/images/storyboard-rhythm-archive.png" alt="动画分镜、色彩脚本与剪辑时间轴组成的制作档案" />
+            </div>
+            <figcaption>
+              <p className="section-index">制作档案 / 02</p>
+              <h3>角色、场景与<br /><em>交付节奏。</em></h3>
+              <p>让每一个镜头在统一的视觉规范中，稳定抵达成片。</p>
+            </figcaption>
+          </figure>
+        </div>
         <aside className="credentials"><p>教育</p><p>千叶工业大学 · 硕士 · 工业设计 · 2014 - 2016</p><p>沈阳理工大学 · 本科 · 工业设计 · 2009 - 2013</p><p>全国CAD技能一级证书 · 日语N2</p></aside>
       </section>
 

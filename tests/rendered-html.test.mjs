@@ -201,9 +201,27 @@ test("prioritizes current AI production dossiers with readable image treatments"
   assert.match(html, /全流程制作 · 2025\.01 - 至今/);
   assert.match(html, /project-dossier--science/);
   assert.match(html, /project-dossier--textbook/);
-  assert.match(css, /\.project-dossier--science::before[\s\S]*opacity:\s*0\.25/);
-  assert.match(css, /\.project-dossier--textbook::before[\s\S]*opacity:\s*0\.25/);
+  assert.match(css, /\.project-dossier--science::before[\s\S]*opacity:\s*0\.18/);
+  assert.match(css, /\.project-dossier--textbook::before[\s\S]*opacity:\s*0\.18/);
   assert.match(css, /\.project-dossier--science::after[\s\S]*linear-gradient/);
+});
+
+test("renders semantic storyboard interludes with restrained visual rules", async () => {
+  const response = await render();
+  const html = await response.text();
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(html, /storyboard-interlude--script/);
+  assert.match(html, /storyboard-interlude--rhythm/);
+  assert.match(html, /纸本分镜、角色设定与监看屏组成的动画制作档案/);
+  assert.match(html, /动画分镜、色彩脚本与剪辑时间轴组成的制作档案/);
+  assert.match(html, /src="\/images\/storyboard-script-to-shot\.png"/);
+  assert.match(html, /src="\/images\/storyboard-rhythm-archive\.png"/);
+  assert.match(css, /\.project-dossier--science::before,[\s\S]*?opacity:\s*0\.18;/);
+  assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)/);
+  assert.match(css, /\.storyboard-interlude\s*\{[\s\S]*?grid-template-columns:/);
+  assert.match(css, /@media\s*\(max-width:\s*760px\)\s*\{[\s\S]*?\.storyboard-interlude\s*\{[\s\S]*?grid-template-columns:\s*1fr/s);
+  assert.doesNotMatch(css, /body[^{]*\{[^}]*background-image:[^}]*storyboard-/);
 });
 
 test("ships a project-scoped GitHub Pages export and deployment workflow", async () => {
