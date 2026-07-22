@@ -54,3 +54,20 @@ test("keeps focus visible and disables smooth scrolling for reduced motion", asy
   assert.match(css, /\.contact a:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--ink\)/);
   assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*\{[^}]*html\s*\{[^}]*scroll-behavior:\s*auto/);
 });
+
+test("keeps the source resume's detailed responsibilities and achievements", async () => {
+  const source = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
+
+  for (const detail of [
+    "将AI智能体矩阵全面嵌入创作制片全流程",
+    "极少出现后期大幅返工情况",
+    "紧扣教学大纲编写故事脚本与视觉方案",
+    "中少社，旗下刊物《我爱科学》的AI动画化制作",
+    "对接甲方，进行高效沟通，深度理解甲方需求",
+    "完成有关图纸方面的绘图及文本制作工作",
+    "设置合适的打印参数",
+    "全国CAD技能一级证书",
+  ]) {
+    assert.match(source, new RegExp(detail));
+  }
+});
