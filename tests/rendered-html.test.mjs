@@ -50,9 +50,9 @@ test("server-renders Qin Chuan's resume identity and anchor sections", async () 
   assert.match(html, /class="editorial-hero"/);
   assert.match(html, /class="dossier-entry"/);
   assert.match(html, /class="project-dossier"/);
-  assert.match(html, /<title>秦川｜AI动画导演 \/ 制片人<\/title>/);
+  assert.match(html, /<title>秦川｜AI动画制作人\/AI短剧全流程搭建<\/title>/);
   assert.match(html, /秦川/);
-  assert.match(html, /AI动画导演/);
+  assert.match(html, /AI动画制作人\/AI短剧全流程搭建/);
   assert.match(html, /17326096652/);
   assert.match(html, /408217203@qq\.com/);
   assert.match(html, /北京/);

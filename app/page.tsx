@@ -132,7 +132,7 @@ export default function Home() {
       <header className="editorial-hero" id="top">
         <p className="kicker">制作档案 / 2026</p>
         <div className="hero-masthead">
-          <p className="hero-role">AI 动画导演 / 制片人</p>
+          <p className="hero-role">AI动画制作人/AI短剧全流程搭建</p>
           <h1>秦川</h1>
         </div>
         <div className="hero-brief">

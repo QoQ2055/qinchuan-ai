@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import "./globals.css";
 
-const title = "秦川｜AI动画导演 / 制片人";
-const description = "秦川，AI动画导演 / 制片人，以智能体工作流完成从创意到成片的全链路制作。";
+const title = "秦川｜AI动画制作人/AI短剧全流程搭建";
+const description = "秦川，AI动画制作人/AI短剧全流程搭建，以智能体工作流完成从创意到成片的全链路制作。";
 const imagePath = "/og.png";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       url: siteUrl.toString(),
       type: "website",
-      images: [{ url: imageUrl, width: 1200, height: 630, alt: "秦川｜AI动画导演 / 制片人" }],
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: "秦川｜AI动画制作人/AI短剧全流程搭建" }],
     },
     twitter: {
       card: "summary_large_image",
