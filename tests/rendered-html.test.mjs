@@ -224,6 +224,21 @@ test("renders semantic storyboard interludes with restrained visual rules", asyn
   assert.doesNotMatch(css, /body[^{]*\{[^}]*background-image:[^}]*storyboard-/);
 });
 
+test("renders a labeled short-drama concept reel with restrained motion", async () => {
+  const response = await render();
+  const html = await response.text();
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(html, /short-drama-reel/);
+  assert.match(html, /Visual Concept Stills/);
+  for (const asset of ["short-drama-wedding-reversal.png", "short-drama-second-chance.png", "short-drama-urban-choice.png", "short-drama-production-archive.png"]) {
+    assert.match(html, new RegExp(asset));
+  }
+  assert.match(css, /\.concept-frame img\s*\{[\s\S]*?aspect-ratio:\s*4\s*\/\s*5/);
+  assert.match(css, /\.concept-frame:hover img\s*\{[\s\S]*?scale\(1\.02\)/);
+  assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.short-drama-reel/s);
+});
+
 test("ships a project-scoped GitHub Pages export and deployment workflow", async () => {
   const exporter = await readFile(new URL("../scripts/export-github-pages.mjs", import.meta.url), "utf8");
   const workflow = await readFile(new URL("../.github/workflows/deploy-pages.yml", import.meta.url), "utf8");

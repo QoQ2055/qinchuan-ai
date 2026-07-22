@@ -568,6 +568,43 @@ a:focus-visible {
   overflow-wrap: anywhere;
 }
 
+.short-drama-reel {
+  grid-column: 1 / -1;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  animation: short-drama-reveal 520ms ease both;
+}
+
+.short-drama-reel-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.short-drama-reel-heading p { margin: 0; }
+
+.concept-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
+
+.concept-frame { position: relative; overflow: hidden; margin: 0; border: 1px solid var(--rule); background: #050505; animation: short-drama-reveal 520ms ease both; }
+.concept-frame:nth-child(2) { animation-delay: 80ms; }
+.concept-frame:nth-child(3) { animation-delay: 160ms; }
+.concept-frame img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; filter: saturate(0.8) contrast(1.04); transition: transform 560ms ease, filter 180ms ease; }
+.concept-frame figcaption { position: absolute; right: 0.65rem; bottom: 0.65rem; color: var(--paper); font-size: 0.58rem; letter-spacing: 0.09em; opacity: 0; transition: opacity 180ms ease; }
+.short-drama-archive { margin: 0.75rem 0 0; overflow: hidden; border: 1px solid var(--rule); }
+.short-drama-archive img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+
+@media (hover: hover) and (pointer: fine) {
+  .concept-frame:hover { border-color: var(--rule-strong); }
+  .concept-frame:hover img { transform: scale(1.02); filter: saturate(0.95) contrast(1.07); }
+  .concept-frame:hover figcaption { opacity: 1; }
+}
+
+@keyframes short-drama-reveal { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
 .storyboard-interlude--rhythm {
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
   margin-top: clamp(2.5rem, 5vw, 4.5rem);
@@ -688,6 +725,9 @@ a:focus-visible {
   .storyboard-interlude--rhythm figcaption {
     justify-self: start;
   }
+
+  .concept-grid { grid-template-columns: 1fr; }
+  .short-drama-reel-heading { display: grid; }
 }
 
 @media (max-width: 720px) {
@@ -817,4 +857,7 @@ a:focus-visible {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
+  .short-drama-reel,
+  .concept-frame { animation: none; }
 }

@@ -211,7 +211,18 @@ export default function Home() {
         <p className="section-index">03 / 项目与资历</p>
         <div className="project-content">
           <h2 id="projects-title">设计，是可被<br /><em>验证的系统。</em></h2>
-          <div className="project-grid">{projects.map(([title, meta, detail, backgroundClass]) => <article className={`project-dossier ${backgroundClass ?? ""}`} key={title}><p className="project-meta">{meta}</p><h3>{title}</h3><p>{detail}</p></article>)}</div>
+          <div className="project-grid">{projects.map(([title, meta, detail, backgroundClass]) => <>
+            <article className={`project-dossier ${backgroundClass ?? ""}`} key={title}><p className="project-meta">{meta}</p><h3>{title}</h3><p>{detail}</p></article>
+            {title === "AI仿真人短剧开发" && <section className="short-drama-reel" aria-label="仿真人短剧视觉概念帧">
+              <div className="short-drama-reel-heading"><p className="section-index">制作档案 / 03</p><p>Visual Concept Stills / 仿真人短剧视觉概念帧</p></div>
+              <div className="concept-grid">
+                <figure className="concept-frame"><img src="/images/short-drama-wedding-reversal.png" alt="婚礼现场中成年人面对决定时刻的仿真人短剧视觉概念帧" /><figcaption>CONCEPT FRAME / 01</figcaption></figure>
+                <figure className="concept-frame"><img src="/images/short-drama-second-chance.png" alt="清晨城市中成年人站在选择路口的仿真人短剧视觉概念帧" /><figcaption>CONCEPT FRAME / 02</figcaption></figure>
+                <figure className="concept-frame"><img src="/images/short-drama-urban-choice.png" alt="都市夜晚两位成年人交谈的仿真人短剧视觉概念帧" /><figcaption>CONCEPT FRAME / 03</figcaption></figure>
+              </div>
+              <figure className="short-drama-archive"><img src="/images/short-drama-production-archive.png" alt="监看屏、场记板与剪辑时间轴组成的短剧制作档案概念图" /></figure>
+            </section>}
+          </>)}</div>
           <figure className="storyboard-interlude storyboard-interlude--rhythm">
             <div className="storyboard-frame">
               <img src="/images/storyboard-rhythm-archive.png" alt="动画分镜、色彩脚本与剪辑时间轴组成的制作档案" />
