@@ -129,16 +129,16 @@ export default function Home() {
         </div>
       </nav>
 
-      <header className="hero" id="top">
-        <p className="eyebrow">AI CREATIVE PRODUCTION · 2026</p>
-        <div className="hero-title">
-          <h1>秦<br />川</h1>
-          <div className="hero-role"><span>AI 动画导演</span><span>/ 制片人</span></div>
+      <header className="editorial-hero" id="top">
+        <p className="kicker">制作档案 / 2026</p>
+        <div className="hero-masthead">
+          <p className="hero-role">AI 动画导演 / 制片人</p>
+          <h1>秦川</h1>
         </div>
-        <div className="hero-meta">
-          <p>北京<br />11年工作经验</p>
+        <div className="hero-brief">
+          <p>北京 · 11年工作经验</p>
           <p>以导演的镜头判断和制片人的管线意识，把 AI 创意稳定地交付为成片。</p>
-          <a href="#contact">开始合作 <span aria-hidden="true">↘</span></a>
+          <a href="#contact">合作联系 <span aria-hidden="true">↘</span></a>
         </div>
       </header>
 
@@ -161,9 +161,13 @@ export default function Home() {
         <div className="experience-heading"><p className="section-index">02 / 工作经历</p><h2 id="experience-title">从构思到<br />规模化生产。</h2></div>
         <div className="experience-list">
           {experience.map((item) => (
-            <article className="experience-card" key={`${item.company}-${item.role}`}>
-              <div className="experience-label"><p>{item.period}</p><p>{item.role}</p></div>
-              <div><h3>{item.company}</h3><p>{item.summary}</p><ul>{item.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul><div className="experience-details">{item.details.map((detail) => <p key={detail}>{detail}</p>)}</div></div>
+            <article className="dossier-entry" key={`${item.company}-${item.role}`}>
+              <div className="dossier-meta"><p>{item.period}</p><p>{item.role}</p></div>
+              <div className="dossier-body">
+                <h3>{item.company}</h3><p className="entry-summary">{item.summary}</p>
+                <ul>{item.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul>
+                <div className="entry-details">{item.details.map((detail) => <p key={detail}>{detail}</p>)}</div>
+              </div>
             </article>
           ))}
         </div>
@@ -171,7 +175,7 @@ export default function Home() {
 
       <section id="projects" className="section projects" aria-labelledby="projects-title">
         <p className="section-index">03 / 项目与资历</p>
-        <div><h2 id="projects-title">设计，是可被<br /><em>验证的系统。</em></h2><div className="project-grid">{projects.map(([title, meta, detail]) => <article key={title}><p>{meta}</p><h3>{title}</h3><p>{detail}</p></article>)}</div></div>
+        <div><h2 id="projects-title">设计，是可被<br /><em>验证的系统。</em></h2><div className="project-grid">{projects.map(([title, meta, detail]) => <article className="project-dossier" key={title}><p className="project-meta">{meta}</p><h3>{title}</h3><p>{detail}</p></article>)}</div></div>
         <aside className="credentials"><p>教育</p><p>千叶工业大学 · 硕士 · 工业设计 · 2014 - 2016</p><p>沈阳理工大学 · 本科 · 工业设计 · 2009 - 2013</p><p>全国CAD技能一级证书 · 日语N2</p></aside>
       </section>
 
