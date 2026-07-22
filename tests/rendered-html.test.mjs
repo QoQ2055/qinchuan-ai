@@ -29,6 +29,9 @@ test("server-renders Qin Chuan's resume identity and anchor sections", async () 
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
+  assert.match(html, /class="editorial-hero"/);
+  assert.match(html, /class="dossier-entry"/);
+  assert.match(html, /class="project-dossier"/);
   assert.match(html, /<title>秦川｜AI动画导演 \/ 制片人<\/title>/);
   assert.match(html, /秦川/);
   assert.match(html, /AI动画导演/);
@@ -47,6 +50,13 @@ test("server-renders Qin Chuan's resume identity and anchor sections", async () 
   for (const id of ["about", "experience", "projects", "contact"]) {
     assert.match(html, new RegExp(`id=["']${id}["']`));
   }
+});
+
+test("uses editorial type rules that cannot collapse title lines", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  assert.match(css, /--display-leading:\s*1\.0[8-9]/);
+  assert.doesNotMatch(css, /line-height:\s*\.7[18]/);
+  assert.match(css, /@media \(max-width:\s*720px\)[\s\S]*\.editorial-hero/);
 });
 
 test("keeps focus visible and disables smooth scrolling for reduced motion", async () => {
