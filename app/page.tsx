@@ -109,7 +109,24 @@ const experience: Experience[] = [
   },
 ];
 
-const projects = [
+const projects: Array<[string, string, string, string?]> = [
+  [
+    "我爱科学",
+    "全流程制作 · 2026.03 - 至今",
+    "参与中少社旗下刊物《我爱科学》AI 动画化制作，负责内容创意与动画流程优化，提升科普内容的传播效率与用户吸引力；同步为中国金融传媒完成消费者权益保护、反诈宣传及金融产品营销系列 AI 动画，助力品牌传播与公众教育；并参与云南文旅宣传动画制作，结合地域文化与视觉创意推进文旅形象的数字化呈现（项目实施中）。",
+    "project-dossier--science",
+  ],
+  [
+    "AI课本动画化",
+    "全流程制作 · 2026.03 - 至今",
+    "负责人教／沪教双版本儿童英语 AI 动画的全流程内容制作：基于 IMAGE2 生成角色与场景，借助 Stable Diffusion 2.0 完成图生视频动态演绎，并以 AI 口型同步和 TTS 形成统一角色对话与视觉规范。单人日产动画片段达 2 条，视觉风格获教研方高度肯定。",
+    "project-dossier--textbook",
+  ],
+  [
+    "AI仿真人短剧开发",
+    "全流程制作 · 2026.03 - 至今",
+    "主导 AI 仿真人短剧从选题策划、剧本开发、AI 生成、后期剪辑到上线发行的全流程制作。作品已在红果短剧稳定运营，代表作包括《撕掉婚纱后》《重生十八岁我拿下了进修名额》《垫付两万八，我拒了亿级大单》。",
+  ],
   ["金属及树脂 3D 打印配件研发", "机构工程师 · 2023.07 - 2024.01", "材料选择：选择适合3D打印的金属材料，如钛合金、铝合金、不锈钢等，并根据配件的使用环境和性能要求，选择合适的材料。设计优化：根据3D打印的特点，对配件的设计进行优化，如减少支撑结构、优化内部结构等，以提高打印效率和产品质量。打印参数设置：根据所选材料和设计优化后的模型，设置合适的打印参数，如打印速度、打印温度、打印层厚等，以确保打印质量和生产效率。业绩：完成金属部件轻量化、优化手里结构6款；完成橡胶整体产品结构优化10余款。"],
   ["杭州新天地三期设计规划", "主案设计师 · 2020.10 - 2023.02", "内容：天地三期设计规划主案设计师；联发集团下属子公司战略规划及设计管理优化咨询师等。业绩：项目职责为负责项目提案、图纸跟进、工程图纸制作、交接、指导施工工程等全业务链条工作。涉及项目全部重要设计节点，对设计管理及人员、图纸调度做系统安排；项目运转流畅，所有重要节点全部提前完成。"],
   ["联发集团下属子公司战略规划及设计管理优化", "咨询师 · 2020.10 - 2023.02", "参与战略规划、设计管理优化与落地辅导。"],
@@ -203,7 +220,7 @@ export default function Home() {
 
       <section id="projects" className="section projects" aria-labelledby="projects-title">
         <p className="section-index">03 / 项目与资历</p>
-        <div><h2 id="projects-title">设计，是可被<br /><em>验证的系统。</em></h2><div className="project-grid">{projects.map(([title, meta, detail]) => <article className="project-dossier" key={title}><p className="project-meta">{meta}</p><h3>{title}</h3><p>{detail}</p></article>)}</div></div>
+        <div><h2 id="projects-title">设计，是可被<br /><em>验证的系统。</em></h2><div className="project-grid">{projects.map(([title, meta, detail, backgroundClass]) => <article className={`project-dossier ${backgroundClass ?? ""}`} key={title}><p className="project-meta">{meta}</p><h3>{title}</h3><p>{detail}</p></article>)}</div></div>
         <aside className="credentials"><p>教育</p><p>千叶工业大学 · 硕士 · 工业设计 · 2014 - 2016</p><p>沈阳理工大学 · 本科 · 工业设计 · 2009 - 2013</p><p>全国CAD技能一级证书 · 日语N2</p></aside>
       </section>
 

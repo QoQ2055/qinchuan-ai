@@ -490,13 +490,50 @@ a:focus-visible {
 }
 
 .project-dossier {
+  position: relative;
+  isolation: isolate;
   min-width: 0;
+  overflow: hidden;
   padding: 1.75rem;
   border-top: 1px solid var(--rule);
   border-right: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
   background: rgba(8, 8, 8, 0.72);
   transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+.project-dossier--science::before,
+.project-dossier--textbook::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.25;
+  background: center / cover no-repeat;
+  filter: grayscale(1) contrast(1.12);
+}
+
+.project-dossier--science::before {
+  background-image: url("/images/ai-storyboard-pipeline.png");
+}
+
+.project-dossier--textbook::before {
+  background-image: url("/images/ai-storyboard-director.png");
+}
+
+.project-dossier--science::after,
+.project-dossier--textbook::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(120deg, rgba(8, 8, 8, 0.95), rgba(8, 8, 8, 0.76));
+}
+
+.project-dossier--science > *,
+.project-dossier--textbook > * {
+  position: relative;
+  z-index: 1;
 }
 
 .project-dossier:hover {
