@@ -177,6 +177,29 @@ test("stages storyboard dossier modules and readable experience metadata", async
   );
 });
 
+test("prioritizes current AI production dossiers with readable image treatments", async () => {
+  const response = await render();
+  const html = await response.text();
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  for (const text of [
+    "AI课本动画化",
+    "AI仿真人短剧开发",
+    "撕掉婚纱后",
+    "重生十八岁我拿下了进修名额",
+    "垫付两万八，我拒了亿级大单",
+  ]) {
+    assert.match(html, new RegExp(text));
+  }
+
+  assert.equal((html.match(/全流程制作 · 2026\.03 - 至今/g) ?? []).length, 3);
+  assert.match(html, /project-dossier--science/);
+  assert.match(html, /project-dossier--textbook/);
+  assert.match(css, /\.project-dossier--science::before[\s\S]*opacity:\s*0\.25/);
+  assert.match(css, /\.project-dossier--textbook::before[\s\S]*opacity:\s*0\.25/);
+  assert.match(css, /\.project-dossier--science::after[\s\S]*linear-gradient/);
+});
+
 test("ships a project-scoped GitHub Pages export and deployment workflow", async () => {
   const exporter = await readFile(new URL("../scripts/export-github-pages.mjs", import.meta.url), "utf8");
   const workflow = await readFile(new URL("../.github/workflows/deploy-pages.yml", import.meta.url), "utf8");
