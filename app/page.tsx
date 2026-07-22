@@ -136,7 +136,13 @@ export default function Home() {
           <h1>秦川</h1>
         </div>
         <div className="hero-brief">
-          <p>北京 · 11年工作经验</p>
+          <div className="hero-facts" aria-label="个人信息">
+            <p>北京 · 11年工作经验</p>
+            <p>男</p>
+            <p>年龄：36岁</p>
+            <p>求职意向：动画设计</p>
+            <p>期望城市：北京</p>
+          </div>
           <p>以导演的镜头判断和制片人的管线意识，把 AI 创意稳定地交付为成片。</p>
           <a href="#contact">合作联系 <span aria-hidden="true">↘</span></a>
         </div>

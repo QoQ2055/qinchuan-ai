@@ -148,6 +148,21 @@ a:focus-visible {
   line-height: 1.7;
 }
 
+.hero-facts {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.hero-facts p {
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+.hero-facts p:first-child {
+  margin-bottom: 0.3rem;
+  color: var(--paper);
+}
+
 .hero-brief a {
   justify-self: end;
   color: var(--signal);
@@ -492,6 +507,7 @@ a:focus-visible {
   .editorial-hero h1 {
     font-size: clamp(3.25rem, 18vw, 5.5rem);
     line-height: 1.08;
+    letter-spacing: 0;
   }
 
   .hero-brief a {

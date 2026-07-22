@@ -52,6 +52,10 @@ test("server-renders Qin Chuan's resume identity and anchor sections", async () 
   assert.match(html, /17326096652/);
   assert.match(html, /408217203@qq\.com/);
   assert.match(html, /北京/);
+  assert.match(html, /男/);
+  assert.match(html, /年龄：36岁/);
+  assert.match(html, /求职意向：动画设计/);
+  assert.match(html, /期望城市：北京/);
   assert.match(html, /北京看云控股有限公司/);
   assert.match(html, /杭州蔻艺文化发展有限公司/);
   assert.match(html, /金属及树脂 3D 打印配件研发/);
@@ -73,7 +77,12 @@ test("uses editorial type rules that cannot collapse title lines", async () => {
   assert.doesNotMatch(css, /line-height:\s*\.7[18]/);
   const mobileRule = /@media\s*\(max-width:\s*720px\)\s*\{/.exec(css);
   assert.ok(mobileRule, "expected a max-width: 720px media block");
-  assert.match(cssBlockAfter(css, mobileRule.index), /\.editorial-hero\b/);
+  const mobileCss = cssBlockAfter(css, mobileRule.index);
+  assert.match(mobileCss, /\.editorial-hero\b/);
+  assert.match(
+    mobileCss,
+    /\.editorial-hero h1\s*\{[^}]*letter-spacing:\s*(?:normal|0(?:[a-z%]+)?);/,
+  );
 });
 
 test("keeps focus visible and disables smooth scrolling for reduced motion", async () => {
