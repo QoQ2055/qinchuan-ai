@@ -105,7 +105,7 @@ test("keeps focus visible and disables smooth scrolling for reduced motion", asy
   assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*\{[^}]*html\s*\{[^}]*scroll-behavior:\s*auto/);
 });
 
-test("adds a restrained dossier image layer and lightweight interaction cues", async () => {
+test("keeps dossier imagery visible and reserves space for entry hover rails", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 
   const heroRule = /\.editorial-hero::before\s*\{/.exec(css);
@@ -124,7 +124,25 @@ test("adds a restrained dossier image layer and lightweight interaction cues", a
 
   const opacity = /opacity:\s*(0?\.\d+)/.exec(heroCss);
   assert.ok(opacity, "hero decoration must declare explicit opacity");
-  assert.ok(Number(opacity[1]) <= 0.35, "hero decoration opacity must stay at or below 0.35");
+  assert.ok(
+    Number(opacity[1]) >= 0.4 && Number(opacity[1]) <= 0.5,
+    "hero decoration must remain visible without overpowering the copy",
+  );
+  assert.match(heroCss, /z-index:\s*0/);
+  assert.doesNotMatch(heroCss, /background-blend-mode:\s*multiply/);
+
+  const entryRule = /\.dossier-entry\s*\{/.exec(css);
+  assert.ok(entryRule, "expected a dossier entry rule");
+  const entryCss = cssBlockAfter(css, entryRule.index);
+  assert.match(entryCss, /border-left:\s*2px solid transparent/);
+  assert.match(entryCss, /padding-inline-start:\s*0\.75rem/);
+
+  const entryHoverRule = /\.dossier-entry:hover\s*\{/.exec(css);
+  assert.ok(entryHoverRule, "expected a dossier entry hover rule");
+  const entryHoverCss = cssBlockAfter(css, entryHoverRule.index);
+  assert.match(entryHoverCss, /border-left-color:\s*var\(--signal\)/);
+  assert.doesNotMatch(entryHoverCss, /box-shadow:/);
+
   assert.match(css, /\.project-dossier\s*\{[^}]*transition:/);
   assert.doesNotMatch(css, /\.project-dossier:hover\s*\{[^}]*transform:/);
   assert.doesNotMatch(css, /\.capabilities span:hover\s*\{[^}]*transform:/);
