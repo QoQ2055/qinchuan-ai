@@ -192,7 +192,9 @@ test("prioritizes current AI production dossiers with readable image treatments"
     assert.match(html, new RegExp(text));
   }
 
-  assert.ok((html.match(/全流程制作 · 2026\.03 - 至今/g) ?? []).length >= 3);
+  assert.match(html, /全流程制作 · 2026\.03 - 至今/);
+  assert.match(html, /全流程制作 · 2025\.05 - 至今/);
+  assert.match(html, /全流程制作 · 2025\.01 - 至今/);
   assert.match(html, /project-dossier--science/);
   assert.match(html, /project-dossier--textbook/);
   assert.match(css, /\.project-dossier--science::before[\s\S]*opacity:\s*0\.25/);
