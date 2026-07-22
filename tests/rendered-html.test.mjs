@@ -91,6 +91,20 @@ test("keeps focus visible and disables smooth scrolling for reduced motion", asy
   assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*\{[^}]*html\s*\{[^}]*scroll-behavior:\s*auto/);
 });
 
+test("adds a restrained dossier image layer and lightweight interaction cues", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(css, /url\(["']?\/images\/editorial-dossier-bg\.png["']?\)/);
+  assert.match(css, /\.editorial-hero::before\s*\{[^}]*opacity:\s*0?\.\d+/);
+  assert.match(css, /\.project-dossier\s*\{[^}]*transition:/);
+  assert.match(css, /\.project-dossier:hover\s*\{[^}]*transform:\s*translateY\(/);
+
+  const reducedMotionRule = /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*\{/.exec(css);
+  assert.ok(reducedMotionRule, "expected a prefers-reduced-motion media block");
+  const reducedMotionCss = cssBlockAfter(css, reducedMotionRule.index);
+  assert.match(reducedMotionCss, /transition-duration:\s*0\.01ms/);
+});
+
 test("keeps the source resume's detailed responsibilities and achievements", async () => {
   const source = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
 
