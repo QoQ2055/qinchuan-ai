@@ -134,6 +134,17 @@ test("adds a restrained dossier image layer and lightweight interaction cues", a
   assert.match(reducedMotionCss, /transition-duration:\s*0\.01ms/);
 });
 
+test("ships a project-scoped GitHub Pages export and deployment workflow", async () => {
+  const exporter = await readFile(new URL("../scripts/export-github-pages.mjs", import.meta.url), "utf8");
+  const workflow = await readFile(new URL("../.github/workflows/deploy-pages.yml", import.meta.url), "utf8");
+
+  assert.match(exporter, /const basePath = "\/qinchuan-ai"/);
+  assert.match(exporter, /https:\/\/qoq2055\.github\.io\$\{basePath\}\//);
+  assert.match(exporter, /replaceAll\('href="\/'/);
+  assert.match(workflow, /actions\/upload-pages-artifact@v3/);
+  assert.match(workflow, /actions\/deploy-pages@v4/);
+});
+
 test("keeps the source resume's detailed responsibilities and achievements", async () => {
   const source = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
 
