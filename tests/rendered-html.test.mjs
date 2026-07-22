@@ -23,6 +23,20 @@ async function render() {
   );
 }
 
+function cssBlockAfter(css, start) {
+  const open = css.indexOf("{", start);
+  assert.notEqual(open, -1, "CSS block must open with a brace");
+
+  let depth = 0;
+  for (let index = open; index < css.length; index += 1) {
+    if (css[index] === "{") depth += 1;
+    if (css[index] === "}") depth -= 1;
+    if (depth === 0) return css.slice(open + 1, index);
+  }
+
+  assert.fail("CSS block must close with a brace");
+}
+
 test("server-renders Qin Chuan's resume identity and anchor sections", async () => {
   const response = await render();
   assert.equal(response.status, 200);
@@ -57,7 +71,9 @@ test("uses editorial type rules that cannot collapse title lines", async () => {
   assert.match(css, /--display-leading:\s*1\.0[8-9]/);
   assert.match(css, /\.editorial-hero h1\s*\{[^}]*line-height:\s*var\(--display-leading\)/);
   assert.doesNotMatch(css, /line-height:\s*\.7[18]/);
-  assert.match(css, /@media\s*\(max-width:\s*720px\)\s*\{[^}]*\.editorial-hero/);
+  const mobileRule = /@media\s*\(max-width:\s*720px\)\s*\{/.exec(css);
+  assert.ok(mobileRule, "expected a max-width: 720px media block");
+  assert.match(cssBlockAfter(css, mobileRule.index), /\.editorial-hero\b/);
 });
 
 test("keeps focus visible and disables smooth scrolling for reduced motion", async () => {
