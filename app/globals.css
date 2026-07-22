@@ -541,12 +541,16 @@ a:focus-visible {
     --rail-width: 8rem;
   }
 
-  .hero-brief {
-    grid-template-columns: var(--rail-width) minmax(0, 1fr);
+  .hero-brief,
+  .section,
+  .experience-heading,
+  .dossier-entry {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 
   .hero-brief a {
-    grid-column: 2;
+    grid-column: auto;
     justify-self: start;
   }
 

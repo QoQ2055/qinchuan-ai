@@ -85,6 +85,16 @@ test("uses editorial type rules that cannot collapse title lines", async () => {
   );
 });
 
+test("collapses resume rails before narrow embedded or mobile viewports clip content", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  const compactRule = /@media\s*\(max-width:\s*980px\)\s*\{/.exec(css);
+  assert.ok(compactRule, "expected a compact-layout media block");
+  const compactCss = cssBlockAfter(css, compactRule.index);
+  assert.match(compactCss, /\.dossier-entry/);
+  assert.match(compactCss, /\.experience-heading/);
+  assert.match(compactCss, /grid-template-columns:\s*1fr;/);
+});
+
 test("keeps focus visible and disables smooth scrolling for reduced motion", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(css, /\.contact a:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--ink\)/);
