@@ -55,8 +55,9 @@ test("server-renders Qin Chuan's resume identity and anchor sections", async () 
 test("uses editorial type rules that cannot collapse title lines", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(css, /--display-leading:\s*1\.0[8-9]/);
+  assert.match(css, /\.editorial-hero h1\s*\{[^}]*line-height:\s*var\(--display-leading\)/);
   assert.doesNotMatch(css, /line-height:\s*\.7[18]/);
-  assert.match(css, /@media \(max-width:\s*720px\)[\s\S]*\.editorial-hero/);
+  assert.match(css, /@media\s*\(max-width:\s*720px\)\s*\{[^}]*\.editorial-hero/);
 });
 
 test("keeps focus visible and disables smooth scrolling for reduced motion", async () => {
