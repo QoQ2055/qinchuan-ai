@@ -25,34 +25,39 @@
 - Modify: `app/layout.tsx`
 - Modify: `app/globals.css`
 - Modify: `tests/rendered-html.test.mjs`
+- Modify: `package.json`
 
 **Interfaces:**
 - Consumes: static resume source from `F:/下载文件/秦川-动画设计.pdf`.
 - Produces: `Home()` rendering sections with IDs `about`, `experience`, `projects`, and `contact`.
 
-- [ ] **Step 1: Write the failing test**
+- [ ] **Step 1: Make the test commands cross-platform**
+
+Replace the Unix-only `WRANGLER_LOG_PATH=...` prefixes in the `dev` and `build` scripts with direct `vinext dev` and `vinext build` commands. This preserves Vinext behavior while allowing the required Windows build and test commands to run.
+
+- [ ] **Step 2: Write the failing test**
 
 Append identity and anchor assertions to `tests/rendered-html.test.mjs`: `assert.match(html, /秦川/)`; `assert.match(html, /AI动画导演/)`; and a loop requiring each of `about`, `experience`, `projects`, `contact` as an `id` attribute.
 
-- [ ] **Step 2: Verify the test fails**
+- [ ] **Step 3: Verify the test fails**
 
 Run `npm test`. Expected result: FAIL because the starter skeleton has no resume identity or anchor sections.
 
-- [ ] **Step 3: Implement the semantic resume page**
+- [ ] **Step 4: Implement the semantic resume page**
 
 Replace the skeleton import with a `<main>` containing a labelled `<nav>`, a hero `<header>`, and sections `about`, `experience`, `projects`, and `contact`. Add typed `experience` objects with `company`, `role`, `period`, `summary`, and `highlights`, and render every PDF role. Include `秦川`, `AI动画导演 / 制片人`, `11年工作经验`, `北京`, `17326096652`, and `408217203@qq.com`. Set `lang="zh-CN"`, title `秦川｜AI动画导演 / 制片人`, and a matching description.
 
-- [ ] **Step 4: Implement the visual system**
+- [ ] **Step 5: Implement the visual system**
 
 Set CSS tokens `--ink:#090909`, `--paper:#f2eee6`, `--muted:#a7a39c`, and `--signal:#d7ff43`. Implement editorial grid rules, large responsive typography, role-detail cards, focus styles, and a `max-width:720px` breakpoint that collapses hero, experience header, and contact grid to one column.
 
-- [ ] **Step 5: Verify the page test passes**
+- [ ] **Step 6: Verify the page test passes**
 
 Run `npm test`. Expected result: PASS with production HTML containing the identity and all four anchors.
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 7: Commit**
 
-Run `git add app/page.tsx app/layout.tsx app/globals.css tests/rendered-html.test.mjs` followed by `git commit -m "feat: build cinematic online resume"`.
+Run `git add package.json app/page.tsx app/layout.tsx app/globals.css tests/rendered-html.test.mjs` followed by `git commit -m "feat: build cinematic online resume"`.
 
 ### Task 2: Create and wire the social preview
 
