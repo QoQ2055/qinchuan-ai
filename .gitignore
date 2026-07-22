@@ -18,6 +18,7 @@
 /.vinext/
 /out/
 /github-pages/
+/cloudbase-static/
 
 # misc
 .DS_Store

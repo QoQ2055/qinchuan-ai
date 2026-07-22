@@ -9,6 +9,7 @@
     "dev": "vinext dev",
     "build": "vinext build",
     "export:github-pages": "node scripts/export-github-pages.mjs",
+    "export:cloudbase": "node scripts/export-cloudbase.mjs",
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",

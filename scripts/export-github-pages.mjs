@@ -19,7 +19,11 @@ async function rewriteCss(directory) {
     if (extname(entry.name) !== ".css") continue;
 
     const css = await readFile(filePath, "utf8");
-    await writeFile(filePath, css.replaceAll('url("/images/', `url("${basePath}/images/`));
+    const projectScopedCss = css
+      .replaceAll('"/images/', `"${basePath}/images/`)
+      .replaceAll("'/images/", `'${basePath}/images/`)
+      .replaceAll("url(/images/", `url(${basePath}/images/`);
+    await writeFile(filePath, projectScopedCss);
   }
 }
 

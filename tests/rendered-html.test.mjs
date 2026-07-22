@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
-import { readFile, stat } from "node:fs/promises";
+import { execFile } from "node:child_process";
+import { readFile, readdir, stat } from "node:fs/promises";
+import { promisify } from "node:util";
 import test from "node:test";
+
+const execFileAsync = promisify(execFile);
 
 async function render() {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
@@ -143,6 +147,39 @@ test("ships a project-scoped GitHub Pages export and deployment workflow", async
   assert.match(exporter, /replaceAll\('href="\/'/);
   assert.match(workflow, /actions\/upload-pages-artifact@v3/);
   assert.match(workflow, /actions\/deploy-pages@v4/);
+});
+
+test("exports dossier imagery beneath the GitHub Pages project path", async () => {
+  const projectRoot = new URL("..", import.meta.url);
+  await execFileAsync(process.execPath, ["scripts/export-github-pages.mjs"], {
+    cwd: projectRoot,
+  });
+
+  const assetDirectory = new URL("../github-pages/assets/", import.meta.url);
+  const cssFile = (await readdir(assetDirectory)).find((file) => file.endsWith(".css"));
+  assert.ok(cssFile, "expected the exported bundle to include a CSS asset");
+
+  const css = await readFile(new URL(`../github-pages/assets/${cssFile}`, import.meta.url), "utf8");
+  assert.match(css, /\/qinchuan-ai\/images\/editorial-dossier-bg\.webp/);
+  assert.doesNotMatch(css, /(?:url\(|["'])\/images\/editorial-dossier-bg\.(?:webp|png)/);
+});
+
+test("prepares a root-scoped static bundle for Tencent CloudBase", async () => {
+  const scriptDirectory = new URL("../scripts/", import.meta.url);
+  assert.ok(
+    (await readdir(scriptDirectory)).includes("export-cloudbase.mjs"),
+    "expected a dedicated CloudBase static export script",
+  );
+
+  const projectRoot = new URL("..", import.meta.url);
+  await execFileAsync(process.execPath, ["scripts/export-cloudbase.mjs"], {
+    cwd: projectRoot,
+  });
+
+  const html = await readFile(new URL("../cloudbase-static/index.html", import.meta.url), "utf8");
+  assert.match(html, /href="\/assets\//);
+  assert.doesNotMatch(html, /\/qinchuan-ai\//);
+  assert.ok((await stat(new URL("../cloudbase-static/images/editorial-dossier-bg.webp", import.meta.url))).size > 0);
 });
 
 test("keeps the source resume's detailed responsibilities and achievements", async () => {
