@@ -38,6 +38,9 @@ test("server-renders Qin Chuan's resume identity and anchor sections", async () 
   assert.match(html, /北京看云控股有限公司/);
   assert.match(html, /杭州蔻艺文化发展有限公司/);
   assert.match(html, /金属及树脂 3D 打印配件研发/);
+  assert.match(html, /联发集团下属子公司战略规划及设计管理优化/);
+  assert.match(html, /达州国际龙郡酒店方案/);
+  assert.match(html, /杭政储出商业地块规划设计，街面再规划/);
   assert.match(html, /千叶工业大学/);
   assert.match(html, /全国 CAD 技能一级证书/);
 
