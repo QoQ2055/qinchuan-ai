@@ -42,7 +42,7 @@ test("server-renders Qin Chuan's resume identity and anchor sections", async () 
   assert.match(html, /达州国际龙郡酒店方案/);
   assert.match(html, /杭政储出商业地块规划设计，街面再规划/);
   assert.match(html, /千叶工业大学/);
-  assert.match(html, /全国 CAD 技能一级证书/);
+  assert.match(html, /全国CAD技能一级证书/);
 
   for (const id of ["about", "experience", "projects", "contact"]) {
     assert.match(html, new RegExp(`id=["']${id}["']`));
