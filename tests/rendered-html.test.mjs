@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, stat } from "node:fs/promises";
 import test from "node:test";
 
 async function render() {
@@ -94,10 +94,29 @@ test("keeps focus visible and disables smooth scrolling for reduced motion", asy
 test("adds a restrained dossier image layer and lightweight interaction cues", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 
-  assert.match(css, /url\(["']?\/images\/editorial-dossier-bg\.png["']?\)/);
-  assert.match(css, /\.editorial-hero::before\s*\{[^}]*opacity:\s*0?\.\d+/);
+  const heroRule = /\.editorial-hero::before\s*\{/.exec(css);
+  assert.ok(heroRule, "expected a decorative hero pseudo-element");
+  const heroCss = cssBlockAfter(css, heroRule.index);
+  assert.match(heroCss, /image-set\([^)]*editorial-dossier-bg\.webp/s);
+
+  const assetUrls = [
+    ...heroCss.matchAll(/url\(["']?(\/images\/[^"')]+)["']?\)/g),
+  ].map((match) => match[1]);
+  assert.ok(assetUrls.includes("/images/editorial-dossier-bg.webp"));
+  for (const assetUrl of new Set(assetUrls)) {
+    const asset = await stat(new URL(`../public${assetUrl}`, import.meta.url));
+    assert.ok(asset.size > 0, `${assetUrl} must exist and contain data`);
+  }
+
+  const opacity = /opacity:\s*(0?\.\d+)/.exec(heroCss);
+  assert.ok(opacity, "hero decoration must declare explicit opacity");
+  assert.ok(Number(opacity[1]) <= 0.35, "hero decoration opacity must stay at or below 0.35");
   assert.match(css, /\.project-dossier\s*\{[^}]*transition:/);
-  assert.match(css, /\.project-dossier:hover\s*\{[^}]*transform:\s*translateY\(/);
+  assert.doesNotMatch(css, /\.project-dossier:hover\s*\{[^}]*transform:/);
+  assert.doesNotMatch(css, /\.capabilities span:hover\s*\{[^}]*transform:/);
+  assert.match(css, /\.project-dossier:hover\s*\{[^}]*border-color:\s*var\(--rule-strong\)/);
+  assert.match(css, /\.contact-grid a:hover[^}]*\{[^}]*transform:\s*translateX\(/);
+  assert.doesNotMatch(css, /\.contact-grid a:hover[^}]*\{[^}]*padding-left:/);
 
   const reducedMotionRule = /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*\{/.exec(css);
   assert.ok(reducedMotionRule, "expected a prefers-reduced-motion media block");
