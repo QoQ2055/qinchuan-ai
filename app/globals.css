@@ -322,7 +322,7 @@ a:focus-visible {
 
 .storyboard-interlude {
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  grid-template-columns: minmax(0, 7fr) minmax(16rem, 4fr);
   align-items: center;
   gap: clamp(2rem, 6vw, 6rem);
   margin: 0;
@@ -355,6 +355,8 @@ a:focus-visible {
 }
 
 .storyboard-frame {
+  justify-self: end;
+  width: min(100%, 34rem);
   overflow: hidden;
   border: 1px solid var(--rule);
   background: #050505;
@@ -587,14 +589,14 @@ a:focus-visible {
 
 .short-drama-reel-heading p { margin: 0; }
 
-.concept-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
+.concept-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 10rem)); justify-content: end; gap: 0.6rem; }
 
 .concept-frame { position: relative; overflow: hidden; margin: 0; border: 1px solid var(--rule); background: #050505; animation: short-drama-reveal 520ms ease both; }
 .concept-frame:nth-child(2) { animation-delay: 80ms; }
 .concept-frame:nth-child(3) { animation-delay: 160ms; }
 .concept-frame img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; filter: saturate(0.8) contrast(1.04); transition: transform 560ms ease, filter 180ms ease; }
 .concept-frame figcaption { position: absolute; right: 0.65rem; bottom: 0.65rem; color: var(--paper); font-size: 0.58rem; letter-spacing: 0.09em; opacity: 0; transition: opacity 180ms ease; }
-.short-drama-archive { margin: 0.75rem 0 0; overflow: hidden; border: 1px solid var(--rule); }
+.short-drama-archive { width: min(100%, 32rem); margin: 0.75rem 0 0 auto; overflow: hidden; border: 1px solid var(--rule); }
 .short-drama-archive img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 
 @media (hover: hover) and (pointer: fine) {
@@ -606,7 +608,7 @@ a:focus-visible {
 @keyframes short-drama-reveal { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
 .storyboard-interlude--rhythm {
-  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  grid-template-columns: minmax(16rem, 4fr) minmax(0, 7fr);
   margin-top: clamp(2.5rem, 5vw, 4.5rem);
   padding: clamp(2rem, 4vw, 3.5rem) 0 0;
   border-top: 1px solid var(--rule);
@@ -615,6 +617,10 @@ a:focus-visible {
 
 .storyboard-interlude--rhythm figcaption {
   justify-self: end;
+}
+
+.storyboard-interlude--rhythm .storyboard-frame {
+  justify-self: start;
 }
 
 .credentials {
@@ -727,6 +733,8 @@ a:focus-visible {
   }
 
   .concept-grid { grid-template-columns: 1fr; }
+  .concept-grid { justify-content: stretch; }
+  .short-drama-archive { width: 100%; }
   .short-drama-reel-heading { display: grid; }
 }
 
