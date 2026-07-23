@@ -227,6 +227,7 @@ test("renders semantic storyboard interludes with restrained visual rules", asyn
 test("renders the real production archive after project cards", async () => {
   const response = await render();
   const html = await response.text();
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 
   for (const asset of [
     "/images/production-scene-rain-wedding.jpg",
@@ -236,7 +237,17 @@ test("renders the real production archive after project cards", async () => {
   ]) assert.match(html, new RegExp(asset.replaceAll(".", "\\.")));
   assert.match(html, /瀹為檯鍒朵綔妗ｆ\s*\/\s*03/);
   assert.match(html, /Production Evidence \/ Character, Scene &amp; Shot Design/);
-  assert.doesNotMatch(html, /short-drama-wedding-reversal|short-drama-second-chance|short-drama-urban-choice|short-drama-production-archive/);
+  const obsoleteArchiveClasses = [
+    "-drama-wedding-reversal",
+    "-drama-second-chance",
+    "-drama-urban-choice",
+    "-drama-production-archive",
+  ].map((suffix) => "short" + suffix);
+  assert.doesNotMatch(html, new RegExp(obsoleteArchiveClasses.join("|")));
+  assert.match(css, /\.production-archive\b/);
+  assert.match(css, /\.production-character-records\b/);
+  assert.match(css, /\.production-shot-record\b/);
+  assert.doesNotMatch(css, new RegExp(`\\.${"concept" + "-grid"}\\b`));
 });
 
 test("renders cinematic interaction hooks without changing the document grid", async () => {
@@ -248,7 +259,8 @@ test("renders cinematic interaction hooks without changing the document grid", a
   assert.match(css, /\.is-revealed/);
   assert.match(css, /\.nav-links a\[aria-current="true"\]/);
   assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.reveal-item/s);
-  assert.match(css, /\.short-drama-reel\s*\{[\s\S]*?grid-column:\s*1\s*\/\s*-1[\s\S]*?min-width:\s*0/s);
+  assert.match(css, /\.production-archive\s*\{[\s\S]*?display:\s*block/s);
+  assert.match(css, /\.production-character-records\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/s);
 });
 
 test("ships a project-scoped GitHub Pages export and deployment workflow", async () => {

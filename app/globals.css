@@ -575,43 +575,124 @@ header, section, figure { transition: opacity 420ms ease, transform 420ms ease; 
   overflow-wrap: anywhere;
 }
 
-.short-drama-reel {
-  grid-column: 1 / -1;
+.production-archive {
+  display: block;
   min-width: 0;
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
+  margin-top: clamp(2.5rem, 6vw, 5rem);
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
   border-top: 1px solid var(--rule);
-  animation: short-drama-reveal 520ms ease both;
 }
 
-.short-drama-reel-heading {
+.production-archive-heading {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
   color: var(--muted);
   font-size: 0.72rem;
+  line-height: 1.6;
 }
 
-.short-drama-reel-heading p { margin: 0; }
+.production-archive-heading p { margin: 0; }
 
-.concept-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 10rem)); justify-content: end; gap: 0.6rem; }
+.production-scene-record {
+  display: grid;
+  grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  max-width: 56rem;
+  margin-left: auto;
+}
 
-.concept-frame { position: relative; overflow: hidden; margin: 0; border: 1px solid var(--rule); background: #050505; animation: short-drama-reveal 520ms ease both; }
-.concept-frame:nth-child(2) { animation-delay: 80ms; }
-.concept-frame:nth-child(3) { animation-delay: 160ms; }
-.concept-frame img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; filter: saturate(0.8) contrast(1.04); transition: transform 560ms ease, filter 180ms ease; }
-.concept-frame figcaption { position: absolute; right: 0.65rem; bottom: 0.65rem; color: var(--paper); font-size: 0.58rem; letter-spacing: 0.09em; opacity: 0; transition: opacity 180ms ease; }
-.short-drama-archive { width: min(100%, 32rem); margin: 0.75rem 0 0 auto; overflow: hidden; border: 1px solid var(--rule); }
-.short-drama-archive img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.production-scene-frame {
+  width: min(100%, 16rem);
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  background: #050505;
+}
+
+.production-scene-frame img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  filter: saturate(0.8) contrast(1.04);
+  transition: transform 220ms ease, filter 180ms ease;
+}
+
+.production-scene-record h3 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.8rem, 3.5vw, 3.5rem);
+  line-height: 1.04;
+  letter-spacing: -0.055em;
+}
+
+.production-scene-record h3 em {
+  color: var(--signal);
+  font-style: normal;
+}
+
+.production-scene-record p {
+  max-width: 36rem;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.production-character-records {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+  max-width: 56rem;
+  margin: clamp(2rem, 5vw, 4rem) 0 0 auto;
+}
+
+.production-evidence-frame,
+.production-shot-record {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  background: #050505;
+  transition: border-color 180ms ease;
+}
+
+.production-evidence-frame img,
+.production-shot-record img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  filter: saturate(0.8) contrast(1.04);
+  transition: transform 220ms ease, filter 180ms ease;
+}
+
+.production-evidence-frame figcaption,
+.production-shot-record figcaption {
+  padding: 0.7rem 0.8rem 0.75rem;
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.55;
+  letter-spacing: 0.04em;
+}
+
+.production-shot-record {
+  width: min(100%, 42rem);
+  margin: clamp(2rem, 5vw, 4rem) 0 0 auto;
+}
 
 @media (hover: hover) and (pointer: fine) {
-  .concept-frame:hover { border-color: var(--rule-strong); }
-  .concept-frame:hover img { transform: scale(1.02); filter: saturate(0.95) contrast(1.07); }
-  .concept-frame:hover figcaption { opacity: 1; }
-}
+  .production-scene-frame:hover,
+  .production-evidence-frame:hover,
+  .production-shot-record:hover { border-color: var(--rule-strong); }
 
-@keyframes short-drama-reveal { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .production-scene-frame:hover img,
+  .production-evidence-frame:hover img,
+  .production-shot-record:hover img {
+    transform: scale(1.012);
+    filter: saturate(0.92) contrast(1.07);
+  }
+}
 
 .storyboard-interlude--rhythm {
   grid-template-columns: minmax(16rem, 4fr) minmax(0, 7fr);
@@ -738,10 +819,25 @@ header, section, figure { transition: opacity 420ms ease, transform 420ms ease; 
     justify-self: start;
   }
 
-  .concept-grid { grid-template-columns: 1fr; }
-  .concept-grid { justify-content: stretch; }
-  .short-drama-archive { width: 100%; }
-  .short-drama-reel-heading { display: grid; }
+  .production-archive-heading {
+    display: grid;
+  }
+
+  .production-scene-record {
+    grid-template-columns: 1fr;
+  }
+
+  .production-scene-frame {
+    width: min(100%, 14rem);
+  }
+
+  .production-character-records {
+    grid-template-columns: 1fr;
+  }
+
+  .production-shot-record {
+    width: 100%;
+  }
 }
 
 @media (max-width: 720px) {
@@ -872,7 +968,5 @@ header, section, figure { transition: opacity 420ms ease, transform 420ms ease; 
     transition-duration: 0.01ms !important;
   }
 
-  .short-drama-reel,
-  .concept-frame { animation: none; }
   .reveal-item, header, section, figure { transition: none; transform: none; }
 }
