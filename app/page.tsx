@@ -216,18 +216,21 @@ export default function Home() {
         <p className="section-index">03 / 项目与资历</p>
         <div className="project-content">
           <h2 id="projects-title">设计，是可被<br /><em>验证的系统。</em></h2>
-          <div className="project-grid">{projects.map(([title, meta, detail, backgroundClass]) => <>
+          <div className="project-grid">{projects.map(([title, meta, detail, backgroundClass]) => (
             <article className={`project-dossier ${backgroundClass ?? ""}`} key={title}><p className="project-meta">{meta}</p><h3>{title}</h3><p>{detail}</p></article>
-            {title === "AI仿真人短剧开发" && <section className="short-drama-reel" aria-label="仿真人短剧视觉概念帧">
-              <div className="short-drama-reel-heading"><p className="section-index">制作档案 / 03</p><p>Visual Concept Stills / 仿真人短剧视觉概念帧</p></div>
-              <div className="concept-grid">
-                <figure className="concept-frame"><img src="/images/short-drama-wedding-reversal.png" alt="婚礼现场中成年人面对决定时刻的仿真人短剧视觉概念帧" /><figcaption>CONCEPT FRAME / 01</figcaption></figure>
-                <figure className="concept-frame"><img src="/images/short-drama-second-chance.png" alt="清晨城市中成年人站在选择路口的仿真人短剧视觉概念帧" /><figcaption>CONCEPT FRAME / 02</figcaption></figure>
-                <figure className="concept-frame"><img src="/images/short-drama-urban-choice.png" alt="都市夜晚两位成年人交谈的仿真人短剧视觉概念帧" /><figcaption>CONCEPT FRAME / 03</figcaption></figure>
-              </div>
-              <figure className="short-drama-archive"><img src="/images/short-drama-production-archive.png" alt="监看屏、场记板与剪辑时间轴组成的短剧制作档案概念图" /></figure>
-            </section>}
-          </>)}</div>
+          ))}</div>
+          <section className="production-archive" aria-labelledby="production-archive-title">
+            <div className="production-archive-heading"><p className="section-index">瀹為檯鍒朵綔妗ｆ / 03</p><p>Production Evidence / Character, Scene &amp; Shot Design</p></div>
+            <div className="production-scene-record">
+              <figure className="production-scene-frame"><img src="/images/production-scene-rain-wedding.jpg" alt="闆ㄥ濠氭埧鍦烘櫙鐨勫疄闄呯煭鍓у埗浣滅礌鏉?" /></figure>
+              <div><h3 id="production-archive-title">鍦烘櫙銆佽鑹蹭笌<br /><em>闀滃ご璇佹嵁銆?</em></h3><p>浠庢垙鍓у満鏅皵姘涖€佽鑹查€犲瀷鍒伴暅澶磋妭濂忥紝褰㈡垚鍙寔缁凯浠ｇ殑鐭墽瑙嗚璧勪骇涓庡埗浣滀緷鎹€?</p></div>
+            </div>
+            <div className="production-character-records">
+              <figure className="production-evidence-frame"><img src="/images/production-character-female-sheet.png" alt="濂虫€ц鑹茬殑瀹為檯鍒朵綔瑙掕壊璁惧畾琛紝鍚渚ц儗瑙嗗浘涓庢潗璐ㄧ粏鑺?" /><figcaption>瑙掕壊璁惧畾 / 閫犲瀷銆佹潗璐ㄤ笌缁嗚妭缁熶竴</figcaption></figure>
+              <figure className="production-evidence-frame"><img src="/images/production-character-male-sheet.png" alt="鐢锋€ц鑹茬殑瀹為檯鍒朵綔瑙掕壊璁惧畾琛紝鍚渚ц儗瑙嗗浘涓庢湇瑁呯粏鑺?" /><figcaption>瑙掕壊璁惧畾 / 瑙嗚瑙勮寖涓庤祫浜т竴鑷存€?</figcaption></figure>
+            </div>
+            <figure className="production-shot-record"><img src="/images/production-storyboard-shot-sheet.png" alt="瀹為檯鍒朵綔鐨勯粦鐧藉垎闀滀笌闀滃ご杩愬姩鎷嗚В琛?" /><figcaption>闀滃ご鎷嗚В / 鏅埆銆佽繍鍔ㄤ笌鑺傚璁捐</figcaption></figure>
+          </section>
           <figure className="storyboard-interlude storyboard-interlude--rhythm">
             <div className="storyboard-frame">
               <img src="/images/storyboard-rhythm-archive.png" alt="动画分镜、色彩脚本与剪辑时间轴组成的制作档案" />
