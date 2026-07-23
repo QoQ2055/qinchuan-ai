@@ -229,25 +229,62 @@ test("renders the real production archive after project cards", async () => {
   const html = await response.text();
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 
-  for (const asset of [
+  const productionAssets = [
     "/images/production-scene-rain-wedding.jpg",
     "/images/production-character-female-sheet.png",
     "/images/production-character-male-sheet.png",
     "/images/production-storyboard-shot-sheet.png",
-  ]) assert.match(html, new RegExp(asset.replaceAll(".", "\\.")));
-  assert.match(html, /瀹為檯鍒朵綔妗ｆ\s*\/\s*03/);
+  ];
+  for (const asset of productionAssets) {
+    assert.match(
+      html,
+      new RegExp(
+        `<img[^>]*src="${asset.replaceAll(".", "\\.")}"[^>]*loading="lazy"[^>]*decoding="async"`,
+      ),
+    );
+    const sourceAsset = await stat(new URL(`../public${asset}`, import.meta.url));
+    assert.ok(sourceAsset.size > 0, `${asset} must exist and contain data`);
+  }
+  for (const text of [
+    "实际制作档案 / 03",
+    "场景、角色与",
+    "镜头证据。",
+    "从戏剧场景氛围、角色造型到镜头节奏，形成可持续迭代的短剧视觉资产与制作依据。",
+    "雨夜婚房场景的实际短剧制作素材",
+    "女性角色的实际制作角色设定表，含正侧背视图与材质细节",
+    "角色设定 / 造型、材质与细节统一",
+    "男性角色的实际制作角色设定表，含正侧背视图与服装细节",
+    "角色设定 / 视觉规范与资产一致性",
+    "实际制作的黑白分镜与镜头运动拆解表",
+    "镜头拆解 / 景别、运动与节奏设计",
+  ]) assert.ok(html.includes(text), `production archive must include: ${text}`);
   assert.match(html, /Production Evidence \/ Character, Scene &amp; Shot Design/);
-  const obsoleteArchiveClasses = [
-    "-drama-wedding-reversal",
-    "-drama-second-chance",
-    "-drama-urban-choice",
-    "-drama-production-archive",
-  ].map((suffix) => "short" + suffix);
-  assert.doesNotMatch(html, new RegExp(obsoleteArchiveClasses.join("|")));
+  for (const obsoleteAsset of [
+    "/images/short-drama-wedding-reversal.png",
+    "/images/short-drama-second-chance.png",
+    "/images/short-drama-urban-choice.png",
+    "/images/short-drama-production-archive.png",
+  ]) assert.ok(!html.includes(obsoleteAsset), `must not render obsolete asset: ${obsoleteAsset}`);
   assert.match(css, /\.production-archive\b/);
   assert.match(css, /\.production-character-records\b/);
   assert.match(css, /\.production-shot-record\b/);
   assert.doesNotMatch(css, new RegExp(`\\.${"concept" + "-grid"}\\b`));
+
+  const mobileRule = /@media\s*\(max-width:\s*760px\)\s*\{/.exec(css);
+  assert.ok(mobileRule, "expected a production archive mobile media block");
+  const mobileCss = cssBlockAfter(css, mobileRule.index);
+  assert.match(mobileCss, /\.production-scene-record\s*\{[^}]*grid-template-columns:\s*1fr/s);
+  assert.match(mobileCss, /\.production-character-records\s*\{[^}]*grid-template-columns:\s*1fr/s);
+
+  const finePointerRule = css.indexOf(
+    "@media (hover: hover) and (pointer: fine)",
+    css.indexOf(".production-archive"),
+  );
+  assert.notEqual(finePointerRule, -1, "expected fine-pointer production archive hover rules");
+  const finePointerCss = cssBlockAfter(css, finePointerRule);
+  assert.match(finePointerCss, /\.production-scene-frame:hover/);
+  assert.match(finePointerCss, /\.production-evidence-frame:hover/);
+  assert.match(finePointerCss, /\.production-shot-record:hover/);
 });
 
 test("renders cinematic interaction hooks without changing the document grid", async () => {
@@ -287,6 +324,18 @@ test("exports dossier imagery beneath the GitHub Pages project path", async () =
   const css = await readFile(new URL(`../github-pages/assets/${cssFile}`, import.meta.url), "utf8");
   assert.match(css, /\/qinchuan-ai\/images\/editorial-dossier-bg\.webp/);
   assert.doesNotMatch(css, /(?:url\(|["'])\/images\/editorial-dossier-bg\.(?:webp|png)/);
+});
+
+test("exports real production archive originals to GitHub Pages", async () => {
+  for (const assetName of [
+    "production-scene-rain-wedding.jpg",
+    "production-character-female-sheet.png",
+    "production-character-male-sheet.png",
+    "production-storyboard-shot-sheet.png",
+  ]) {
+    const exportedAsset = await stat(new URL(`../github-pages/images/${assetName}`, import.meta.url));
+    assert.ok(exportedAsset.size > 0, `${assetName} must be exported and contain data`);
+  }
 });
 
 test("prepares a root-scoped static bundle for Tencent CloudBase", async () => {

@@ -220,16 +220,16 @@ export default function Home() {
             <article className={`project-dossier ${backgroundClass ?? ""}`} key={title}><p className="project-meta">{meta}</p><h3>{title}</h3><p>{detail}</p></article>
           ))}</div>
           <section className="production-archive" aria-labelledby="production-archive-title">
-            <div className="production-archive-heading"><p className="section-index">瀹為檯鍒朵綔妗ｆ / 03</p><p>Production Evidence / Character, Scene &amp; Shot Design</p></div>
+            <div className="production-archive-heading"><p className="section-index">实际制作档案 / 03</p><p>Production Evidence / Character, Scene &amp; Shot Design</p></div>
             <div className="production-scene-record">
-              <figure className="production-scene-frame"><img src="/images/production-scene-rain-wedding.jpg" alt="闆ㄥ濠氭埧鍦烘櫙鐨勫疄闄呯煭鍓у埗浣滅礌鏉?" /></figure>
-              <div><h3 id="production-archive-title">鍦烘櫙銆佽鑹蹭笌<br /><em>闀滃ご璇佹嵁銆?</em></h3><p>浠庢垙鍓у満鏅皵姘涖€佽鑹查€犲瀷鍒伴暅澶磋妭濂忥紝褰㈡垚鍙寔缁凯浠ｇ殑鐭墽瑙嗚璧勪骇涓庡埗浣滀緷鎹€?</p></div>
+              <figure className="production-scene-frame"><img src="/images/production-scene-rain-wedding.jpg" alt="雨夜婚房场景的实际短剧制作素材" loading="lazy" decoding="async" /></figure>
+              <div><h3 id="production-archive-title">场景、角色与<br /><em>镜头证据。</em></h3><p>从戏剧场景氛围、角色造型到镜头节奏，形成可持续迭代的短剧视觉资产与制作依据。</p></div>
             </div>
             <div className="production-character-records">
-              <figure className="production-evidence-frame"><img src="/images/production-character-female-sheet.png" alt="濂虫€ц鑹茬殑瀹為檯鍒朵綔瑙掕壊璁惧畾琛紝鍚渚ц儗瑙嗗浘涓庢潗璐ㄧ粏鑺?" /><figcaption>瑙掕壊璁惧畾 / 閫犲瀷銆佹潗璐ㄤ笌缁嗚妭缁熶竴</figcaption></figure>
-              <figure className="production-evidence-frame"><img src="/images/production-character-male-sheet.png" alt="鐢锋€ц鑹茬殑瀹為檯鍒朵綔瑙掕壊璁惧畾琛紝鍚渚ц儗瑙嗗浘涓庢湇瑁呯粏鑺?" /><figcaption>瑙掕壊璁惧畾 / 瑙嗚瑙勮寖涓庤祫浜т竴鑷存€?</figcaption></figure>
+              <figure className="production-evidence-frame"><img src="/images/production-character-female-sheet.png" alt="女性角色的实际制作角色设定表，含正侧背视图与材质细节" loading="lazy" decoding="async" /><figcaption>角色设定 / 造型、材质与细节统一</figcaption></figure>
+              <figure className="production-evidence-frame"><img src="/images/production-character-male-sheet.png" alt="男性角色的实际制作角色设定表，含正侧背视图与服装细节" loading="lazy" decoding="async" /><figcaption>角色设定 / 视觉规范与资产一致性</figcaption></figure>
             </div>
-            <figure className="production-shot-record"><img src="/images/production-storyboard-shot-sheet.png" alt="瀹為檯鍒朵綔鐨勯粦鐧藉垎闀滀笌闀滃ご杩愬姩鎷嗚В琛?" /><figcaption>闀滃ご鎷嗚В / 鏅埆銆佽繍鍔ㄤ笌鑺傚璁捐</figcaption></figure>
+            <figure className="production-shot-record"><img src="/images/production-storyboard-shot-sheet.png" alt="实际制作的黑白分镜与镜头运动拆解表" loading="lazy" decoding="async" /><figcaption>镜头拆解 / 景别、运动与节奏设计</figcaption></figure>
           </section>
           <figure className="storyboard-interlude storyboard-interlude--rhythm">
             <div className="storyboard-frame">
