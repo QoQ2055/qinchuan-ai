@@ -98,6 +98,11 @@ a:focus-visible {
   color: var(--signal);
 }
 
+.nav-links a[aria-current="true"] { color: var(--signal); }
+#reading-progress { position: fixed; z-index: 10; top: 0; left: 0; width: var(--reading-progress, 0%); height: 1px; background: var(--signal); pointer-events: none; transition: width 120ms linear; }
+header, section, figure { transition: opacity 420ms ease, transform 420ms ease; }
+@media (prefers-reduced-motion: no-preference) { header, section, figure { opacity: 0.72; transform: translateY(12px); } header.is-revealed, section.is-revealed, figure.is-revealed { opacity: 1; transform: translateY(0); } }
+
 .nav-links a {
   position: relative;
   padding-block: 0.4rem;
@@ -572,6 +577,7 @@ a:focus-visible {
 
 .short-drama-reel {
   grid-column: 1 / -1;
+  min-width: 0;
   margin-top: 1.5rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--rule);
@@ -868,4 +874,5 @@ a:focus-visible {
 
   .short-drama-reel,
   .concept-frame { animation: none; }
+  .reveal-item, header, section, figure { transition: none; transform: none; }
 }

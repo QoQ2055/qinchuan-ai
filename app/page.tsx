@@ -1,3 +1,5 @@
+import { CinematicInteractions } from "./components/cinematic-interactions";
+
 type Experience = {
   company: string;
   role: string;
@@ -138,7 +140,8 @@ const projects: Array<[string, string, string, string?]> = [
 
 export default function Home() {
   return (
-    <main>
+    <main data-reveal="">
+      <CinematicInteractions />
       <nav className="site-nav" aria-label="页面导航">
         <a className="wordmark" href="#top">秦川 <span>/ QC</span></a>
         <div className="nav-links">

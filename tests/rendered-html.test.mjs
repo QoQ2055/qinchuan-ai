@@ -239,6 +239,18 @@ test("renders a labeled short-drama concept reel with restrained motion", async 
   assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.short-drama-reel/s);
 });
 
+test("renders cinematic interaction hooks without changing the document grid", async () => {
+  const response = await render();
+  const html = await response.text();
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  assert.match(html, /id="reading-progress"/);
+  assert.match(html, /data-reveal=""/);
+  assert.match(css, /\.is-revealed/);
+  assert.match(css, /\.nav-links a\[aria-current="true"\]/);
+  assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.reveal-item/s);
+  assert.match(css, /\.short-drama-reel\s*\{[\s\S]*?grid-column:\s*1\s*\/\s*-1[\s\S]*?min-width:\s*0/s);
+});
+
 test("ships a project-scoped GitHub Pages export and deployment workflow", async () => {
   const exporter = await readFile(new URL("../scripts/export-github-pages.mjs", import.meta.url), "utf8");
   const workflow = await readFile(new URL("../.github/workflows/deploy-pages.yml", import.meta.url), "utf8");
