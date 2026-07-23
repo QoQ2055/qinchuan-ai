@@ -142,6 +142,8 @@ assert.match(css, /\.production-shot-record\s*\{/);
 assert.doesNotMatch(css, /\.concept-grid\s*\{/);
 ```
 
+In the existing `renders cinematic interaction hooks without changing the document grid` test, replace its `.short-drama-reel` assertion with assertions that `.production-archive` is a standalone block and `.production-character-records` has `minmax(0, 1fr)` columns. This preserves the layout-regression check without retaining an obsolete class name.
+
 - [ ] **Step 2: Run the focused test**
 
 Run: `node --test tests/rendered-html.test.mjs`
