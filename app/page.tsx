@@ -159,8 +159,10 @@ export default function Home() {
             <p>年龄：36岁</p>
             <p>求职意向：动画设计</p>
             <p>期望城市：北京</p>
+            <p>千叶工业大学 · 硕士 · 工业设计 · 2014 - 2016</p>
+            <p>沈阳理工大学 · 本科 · 工业设计 · 2009 - 2013</p>
           </div>
-          <p>以导演的镜头判断和制片人的管线意识，把 AI 创意稳定地交付为成片。</p>
+          <p>覆盖 AI 动画与仿真人短剧的全流程制作：从选题、剧本与分镜，到角色／场景生成、镜头调度、剪辑合成和上线交付；以导演的叙事判断统一画面，以制片化管线保障效率、品质与产能。</p>
           <a href="#contact">合作联系 <span aria-hidden="true">↘</span></a>
         </div>
       </header>
@@ -234,7 +236,7 @@ export default function Home() {
             </figcaption>
           </figure>
         </div>
-        <aside className="credentials"><p>教育</p><p>千叶工业大学 · 硕士 · 工业设计 · 2014 - 2016</p><p>沈阳理工大学 · 本科 · 工业设计 · 2009 - 2013</p><p>全国CAD技能一级证书 · 日语N2</p></aside>
+        <aside className="credentials"><p>资质</p><p>全国CAD技能一级证书 · 日语N2</p></aside>
       </section>
 
       <section id="contact" className="contact" aria-labelledby="contact-title">
