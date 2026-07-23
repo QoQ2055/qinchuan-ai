@@ -64,9 +64,9 @@ git commit -m "assets: add real production archive media"
 - Consumes: four `production-*` paths from Task 1.
 - Produces: a sibling `<section className="production-archive" aria-labelledby="production-archive-title">` after `.project-grid`.
 
-- [ ] **Step 1: Extend the failing test with semantic assertions**
+- [ ] **Step 1: Replace the stale concept-reel test with production-archive assertions**
 
-Append:
+Replace the existing test named `renders a labeled short-drama concept reel with restrained motion` with:
 
 ```js
 for (const asset of [
@@ -82,7 +82,7 @@ assert.doesNotMatch(html, /short-drama-wedding-reversal|short-drama-second-chanc
 
 - [ ] **Step 2: Run the focused test**
 
-Run: `node --test tests/rendered-html.test.mjs`
+Run: `npm run build; node --test tests/rendered-html.test.mjs`
 
 Expected: FAIL because generated concept-frame markup is still rendered.
 
@@ -109,7 +109,7 @@ Delete the old conditional `title === "AI仿真人短剧开发"` section and eve
 
 - [ ] **Step 4: Run the focused test**
 
-Run: `node --test tests/rendered-html.test.mjs`
+Run: `npm run build; node --test tests/rendered-html.test.mjs`
 
 Expected: PASS with new labels and production URLs, and no generated short-drama path.
 
